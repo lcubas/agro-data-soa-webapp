@@ -1,6 +1,6 @@
 import { WeatherResponse, PricesResponse, RecommendationsResponse } from "./types";
 
-const baseApiUrl = process.env.NEXT_PUBLIC_API_BASE ?? "http://localhost:3001/api";
+const baseApiUrl = "https://us-central1-agro-data-soa-app.cloudfunctions.net/api";
 
 export async function fetchWeather(lat: number, lon: number, days = 10): Promise<WeatherResponse> {
   const response = await fetch(`${baseApiUrl}/weather?lat=${lat}&lon=${lon}&days=${days}`, { cache: "no-store" });
