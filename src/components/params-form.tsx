@@ -11,6 +11,15 @@ import type {
   RecommendationsResponse,
   WeatherResponse,
 } from "@/lib/types";
+import { toast } from "sonner";
+
+const CULTIVO_OPTIONS = [
+  "Actual",
+  "Cebolla Roja",
+  "Maíz Amarillo Duro",
+  "Papa Amarilla",
+  "Arroz",
+];
 
 type Props = {
   onData: (d: {
@@ -20,11 +29,12 @@ type Props = {
     region: string;
     crop: string;
   }) => void;
+  initialCultivo?: string;
 };
 
-export default function ParamsForm({ onData }: Props) {
+export default function ParamsForm({ onData, initialCultivo = "Actual" }: Props) {
   const [region, setRegion] = useState("Lima");
-  const [crop, setCrop] = useState("Papa Amarilla");
+  const [crop, setCrop] = useState(initialCultivo);
   const [lat, setLat] = useState<number | "">(-12.0464);
   const [lon, setLon] = useState<number | "">(-77.0428);
   const [loading, setLoading] = useState(false);
@@ -61,9 +71,10 @@ export default function ParamsForm({ onData }: Props) {
         }),
       ]);
       onData({ weather: wx, prices: px, recs: rc, region, crop });
+      toast.success("Parámetros guardados correctamente");
     } catch (e) {
       console.error(e);
-      alert("Ocurrió un error. Revisa la consola.");
+      toast.error("Error al guardar parámetros");
     } finally {
       setLoading(false);
     }
@@ -86,7 +97,7 @@ export default function ParamsForm({ onData }: Props) {
               placeholder="Lima, Junín, Cusco…"
             />
             <datalist id="regiones">
-              {["Lima", "Junín", "Cusco", "Arequipa", "Piura"].map((r) => (
+              {["Lima", "Junín", "Cusco", "Huancayo"].map((r) => (
                 <option key={r} value={r} />
               ))}
             </datalist>
@@ -101,12 +112,7 @@ export default function ParamsForm({ onData }: Props) {
               placeholder="Papa Amarilla, Cebolla Roja…"
             />
             <datalist id="cultivos">
-              {[
-                "Papa Amarilla",
-                "Cebolla Roja",
-                "Maíz Amarillo Duro",
-                "Arroz",
-              ].map((c) => (
+              {CULTIVO_OPTIONS.map((c) => (
                 <option key={c} value={c} />
               ))}
             </datalist>

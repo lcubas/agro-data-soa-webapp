@@ -32,7 +32,7 @@ export function PricesChart({
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Precios mayoristas (últimos 60–90 días)</CardTitle>
+        <CardTitle>Precios mayoristas (últimos 60 - 90 días)</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
         <Line
