@@ -5,26 +5,19 @@
 Before starting, ensure you have the following installed:
 
 - [Node.js](https://nodejs.org/) (v20 or higher recommended)
-- [pnpm](https://pnpm.io/) (or alternatively, npm, yarn, or bun)
-
-You can install pnpm globally using:
-
-```bash
-npm install -g pnpm
-```
 
 ## Getting Started
 
 1. **Install dependencies:**
 
    ```bash
-   pnpm install
+   npm install
    ```
 
 2. **Run the development server:**
 
    ```bash
-   pnpm run dev
+   npm run dev
    ```
 
 3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
