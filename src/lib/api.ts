@@ -1,13 +1,14 @@
 import { WeatherResponse, PricesResponse, RecommendationsResponse } from "./types";
 
-const baseApiUrl = "https://us-central1-agro-data-soa-app.cloudfunctions.net/api";
+const baseApiUrl = process.env.NEXT_PUBLIC_API_BASE || "https://us-central1-agro-data-soa-app.cloudfunctions.net/api/v1";
 
 export async function fetchWeather(lat: number, lon: number, days = 10): Promise<WeatherResponse> {
   const response = await fetch(`${baseApiUrl}/weather?lat=${lat}&lon=${lon}&days=${days}`, { cache: "no-store" });
 
   if (!response.ok) throw new Error("Error al obtener clima");
-  
-  return response.json();
+
+  const wheater = await response.json();
+  return wheater.data;
 }
 
 export async function fetchPrices(product: string, region: string, days = 90): Promise<PricesResponse> {
@@ -20,7 +21,9 @@ export async function fetchPrices(product: string, region: string, days = 90): P
 
   if (!response.ok) throw new Error("Error al obtener precios");
 
-  return response.json();
+  const prices = await response.json();
+
+  return prices.data;
 }
 
 export async function fetchRecommendations(input: {
@@ -39,5 +42,6 @@ export async function fetchRecommendations(input: {
 
   if (!response.ok) throw new Error("Error al obtener recomendaciones");
 
-  return response.json();
+  const recommendation = await response.json();
+  return recommendation.data;
 }
