@@ -24,7 +24,7 @@ const NavLink = ({
   children: React.ReactNode;
 }) => {
   const pathname = usePathname();
-  const active = pathname === href || (href === "/" && pathname === "/");
+  const active = pathname === href;
 
   return (
     <Link
@@ -74,7 +74,7 @@ export default function Topbar() {
         <div className="font-semibold">🌱 AgroData Perú</div>
 
         <nav className="flex items-center gap-1">
-          <NavLink href="/">Dashboard</NavLink>
+          <NavLink href="/dashboard">Dashboard</NavLink>
           <NavLink href="/arquitectura">Arquitectura SOA</NavLink>
         </nav>
 

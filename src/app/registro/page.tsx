@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
 import { usePasswordValidation } from "@/hooks/usePasswordValidation";
@@ -16,10 +16,11 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { getFirebaseAuthErrorMessage } from "@/lib/firebase/getFirebaseAuthErrorMessage";
+import Loading from "@/components/loading";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { registerWithEmail, loginWithGoogle, loading } = useAuth();
+  const { registerWithEmail, loginWithGoogle, user, loading } = useAuth();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +29,10 @@ export default function RegisterPage() {
 
   const { validations, strength, isValid } = usePasswordValidation(password);
   const passwordsMatch = password === confirmPassword && confirmPassword !== "";
+
+  useEffect(() => {
+    if (user) router.replace("/dashboard");
+  }, [user]);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -74,13 +79,7 @@ export default function RegisterPage() {
     }
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-muted-foreground">Cargando...</p>
-      </div>
-    );
-  }
+  if (loading) return <Loading />;
 
   return (
     <AuthCard title="Crear cuenta" description="Regístrate en AgroData Perú">
@@ -169,11 +168,7 @@ export default function RegisterPage() {
           </div>
         </div>
 
-        <GoogleSignInButton
-          onClick={handleGoogleAuth}
-          disabled={submitting}
-          // text="Registrarse con Google"
-        />
+        <GoogleSignInButton onClick={handleGoogleAuth} disabled={submitting} />
 
         <div className="text-center text-sm">
           <span className="text-muted-foreground">¿Ya tienes cuenta? </span>
