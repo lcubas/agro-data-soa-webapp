@@ -1,4 +1,4 @@
-export const getFirebaseAuthErrorMessage = (errorCode: string): string  => {
+export const getFirebaseAuthErrorMessage = (errorCode: string): string => {
   const errorMessages: Record<string, string> = {
     "auth/email-already-in-use": "Este email ya está registrado",
     "auth/invalid-email": "Email inválido",
@@ -15,10 +15,10 @@ export const getFirebaseAuthErrorMessage = (errorCode: string): string  => {
   };
 
   const errorMessageKey = Object.keys(errorMessages).find((key) =>
-    errorCode.includes(key)
+    errorCode.includes(key),
   );
 
   const message = errorMessageKey ? errorMessages[errorMessageKey] : undefined;
 
   return message ?? "Error al autenticar. Intenta nuevamente";
-}
+};
