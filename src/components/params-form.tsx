@@ -32,7 +32,10 @@ type Props = {
   initialCultivo?: string;
 };
 
-export default function ParamsForm({ onData, initialCultivo = "Actual" }: Props) {
+export default function ParamsForm({
+  onData,
+  initialCultivo = "Actual",
+}: Props) {
   const [region, setRegion] = useState("Lima");
   const [crop, setCrop] = useState(initialCultivo);
   const [lat, setLat] = useState<number | "">(-12.0464);
@@ -47,7 +50,7 @@ export default function ParamsForm({ onData, initialCultivo = "Actual" }: Props)
         setLat(Number(pos.coords.latitude.toFixed(4)));
         setLon(Number(pos.coords.longitude.toFixed(4)));
       },
-      () => alert("No se pudo obtener ubicación")
+      () => alert("No se pudo obtener ubicación"),
     );
   }, []);
 

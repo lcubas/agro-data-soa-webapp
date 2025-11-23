@@ -11,7 +11,7 @@ const Line = dynamic(
     await import("chart.js/auto");
     return reactChartJs2.Line;
   },
-  { ssr: false }
+  { ssr: false },
 );
 
 export function PricesChart({

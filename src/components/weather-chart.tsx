@@ -12,13 +12,13 @@ const Line = dynamic(
     await import("chart.js/auto");
     return reactChartJs2.Line;
   },
-  { ssr: false }
+  { ssr: false },
 );
 
 export function WeatherChart({ data }: { data: WeatherResponse }) {
   const labels = useMemo(
     () => data.daily.map((d) => localeDate(d.date)),
-    [data]
+    [data],
   );
   const weatherChartData = useMemo(
     () => ({
@@ -46,7 +46,7 @@ export function WeatherChart({ data }: { data: WeatherResponse }) {
         },
       ],
     }),
-    [data, labels]
+    [data, labels],
   );
 
   const frostDays = data.daily
