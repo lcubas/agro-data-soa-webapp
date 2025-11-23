@@ -56,7 +56,7 @@ export function WeatherChart({ data }: { data: WeatherResponse }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Pronóstico (10 días)</CardTitle>
+        <CardTitle>Pronóstico (16 días)</CardTitle>
       </CardHeader>
       <CardContent className="space-y-3">
         <div className="relative">

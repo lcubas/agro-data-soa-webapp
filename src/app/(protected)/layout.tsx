@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import Loading from "@/components/loading";
 
 export default function ProtectedLayout({
   children,
@@ -18,17 +19,9 @@ export default function ProtectedLayout({
     }
   }, [user, loading, router]);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p className="text-muted-foreground">Verificando autenticación...</p>
-      </div>
-    );
-  }
+  if (loading) return <Loading />;
 
-  if (!user) {
-    return null;
-  }
+  if (!user) return <Loading />;
 
   return <>{children}</>;
 }
